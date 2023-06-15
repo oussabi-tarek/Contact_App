@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondary"
+    tools:context=".AjoutModifContact">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
+        android:layout_centerInParent="true">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileimage"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_person_24"
+            app:civ_border_width="@dimen/_1sdp"
+            app:civ_border_color="@color/colorTextPrimary"
+            />
+
+        <EditText
+            android:id="@+id/nompersonne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Nom"
+            android:textColorHint="@color/white"
+            android:background="@drawable/background_input_field"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableStart="@drawable/baseline_text_fields_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/colorTextSecondary"
+            />
+        <EditText
+            android:id="@+id/numero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="Numero de telephone"
+            android:textColorHint="@color/white"
+            android:background="@drawable/background_input_field"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableStart="@drawable/baseline_phone_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/colorTextSecondary"
+            />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:textColorHint="@color/white"
+            android:background="@drawable/background_input_field"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableStart="@drawable/baseline_email_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/colorTextSecondary"
+            />
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textLongMessage"
+            android:hint="Note"
+            android:textColorHint="@color/white"
+            android:background="@drawable/background_input_field"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableStart="@drawable/baseline_note_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/colorTextSecondary"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ajoutcontact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/_10sdp"
+        android:src="@drawable/baseline_add_24"
+        android:backgroundTint="@color/colorTextPrimary"
+        app:tint="@color/white"
+        android:elevation="@dimen/_5sdp"
+        app:pressedTranslationZ="@dimen/_10sdp"
+        android:contentDescription="ajout" />
+
+</RelativeLayout>

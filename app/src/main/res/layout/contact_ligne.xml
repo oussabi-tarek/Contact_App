@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/colorSecondary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/_5sdp"
+    tools:ignore="MissingClass">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contactimage"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/baseline_person_24"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/_1sdp"
+            android:padding="@dimen/_5sdp"
+            />
+
+        <TextView
+            android:id="@+id/contactnom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toStartOf="@id/contacttelephone"
+            android:layout_toEndOf="@id/contactimage"
+            android:text="Nom du contact"
+            android:textColor="@color/colorTextSecondary"
+
+            android:textSize="@dimen/_16sdp" />
+
+        <ImageView
+            android:id="@+id/contacttelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_phone_24"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            />
+
+     </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
