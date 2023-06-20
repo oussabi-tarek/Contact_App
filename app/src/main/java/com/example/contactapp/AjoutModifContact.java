@@ -25,6 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.concurrent.ExecutionException;
+
 public class AjoutModifContact extends AppCompatActivity {
 
     private ImageView profileimage;
@@ -89,14 +91,40 @@ public class AjoutModifContact extends AppCompatActivity {
         numero = findViewById(R.id.numero);
         note = findViewById(R.id.note);
         ajoutcontact = findViewById(R.id.ajoutcontact);
+        Contact contact_to_modify = null;
+        if(id!=null){
+            // modification du titre de l'action bar
+            actionBar.setTitle("Modifier le contact");
+            // modification du bouton ajoutcontact
+            ajoutcontact.setImageResource(R.drawable.baseline_mode_edit_24);
+            // récupération des données du contact
+            FetchParIdAsyncTask fetchParIdAsyncTask = new FetchParIdAsyncTask(contactDatabase.contactDao());
+
+            try {
+                contact_to_modify = fetchParIdAsyncTask.execute(Integer.parseInt(id)).get();
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            // initialisation des variables
+            nompersonne.setText(contact_to_modify.getNom());
+            email.setText(contact_to_modify.getEmail());
+            numero.setText(contact_to_modify.getNumero());
+            note.setText(contact_to_modify.getNote());
+            profileimage.setImageURI(Uri.parse(contact_to_modify.getProfileimage()));
+            image_uri=Uri.parse(contact_to_modify.getProfileimage());
+        }
+
         // listener sur le bouton ajoutcontact
+        Contact finalContact_to_modify = contact_to_modify;
         ajoutcontact.setOnClickListener(v -> {
             // enregistrement des données saisies
             if(id==null) {
                 enregistrerDonnees();
             }
             else
-                modifierContact();
+                modifierContact(finalContact_to_modify);
         });
         profileimage.setOnClickListener(v -> {
             // affichage de la boite de dialogue pour choisir la source de l'image
@@ -107,13 +135,18 @@ public class AjoutModifContact extends AppCompatActivity {
 
     }
 
-    private void modifierContact() {
+    private void modifierContact(Contact contact) {
         // récupération des données saisies
         nompersonne1 = nompersonne.getText().toString().trim();
         email1 = email.getText().toString().trim();
         numero1 = numero.getText().toString().trim();
         note1 = note.getText().toString().trim();
-
+            profileimage1 = image_uri.toString();
+        contact.setNom(nompersonne1);
+        contact.setEmail(email1);
+        contact.setNumero(numero1);
+        contact.setNote(note1);
+        contact.setProfileimage(profileimage1);
         // vérification des données
         if (nompersonne1.isEmpty()) {
             // nompersonne vide
@@ -130,7 +163,6 @@ public class AjoutModifContact extends AppCompatActivity {
         } else {
             // toutes les données sont saisies
             // insertion dans la base de données
-            Contact contact = new Contact(image_uri.toString(),nompersonne1,numero1,email1,note1);
             modifierAsyncTask = new ModifierAsyncTask(contactDatabase.contactDao());
             modifierAsyncTask.execute(contact);
             Toast.makeText(this, "Contact modifié avec succès", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -79,26 +80,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // filtrer les contacts
-                try {
-                    chercherContact(query);
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                chercherContact(query);
                 return true;
             }
             // quand on tape sur le bouton chercher
             @Override
             public boolean onQueryTextChange(String newText) {
                 // filtrer les contacts
-                try {
-                    chercherContact(newText);
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                chercherContact(newText);
                 return true;
             }
         });
@@ -106,11 +95,16 @@ public class MainActivity extends AppCompatActivity {
         return  true;
     }
 
-    private void chercherContact(String newText) throws ExecutionException, InterruptedException {
-        contacts=chercherContactAsyncTask.execute(newText).get();
+    private void chercherContact(String newText)  {
+        ArrayList<Contact>  contacts_filtrer=new ArrayList<>();
+        for (Contact contact:contacts){
+           if(contact.getNom().toLowerCase().contains(newText.toLowerCase())){
+               contacts_filtrer.add(contact);
+           }
+       }
         // creer un adapter pour afficher les contacts dans
         ContactAdapter contactAdapter=new ContactAdapter
-                (this,R.layout.contact_ligne,contacts);
+                (this,R.layout.contact_ligne,contacts_filtrer);
         // on affecte l'adapter a notre liste view
         lv.setAdapter(contactAdapter);
     }
