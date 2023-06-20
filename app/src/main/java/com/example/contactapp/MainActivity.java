@@ -117,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 supprimerTousAsyncTask=new SupprimerTousAsyncTask(contactDatabase.contactDao());
                 supprimerTousAsyncTask.execute();
                 Toast.makeText(this, "Suppression reussie", Toast.LENGTH_SHORT).show();
+                // se rafraichir
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
